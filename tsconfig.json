@@ -3,9 +3,9 @@
     "incremental": true,
     "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "composite": true,
@@ -28,12 +28,10 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.js",
-    "**/*.mjs",
     "**/*.ts",
     "**/*.tsx",
     "**/*.json",
