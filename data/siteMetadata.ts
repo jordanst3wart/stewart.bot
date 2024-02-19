@@ -1,14 +1,14 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Jordan.in Blog',
+  title: 'Stewart.bot Blog',
   author: 'Jordan Stewart',
-  headerTitle: 'Jordan.in',
+  headerTitle: 'Stewart.bot',
   description: "I write about my problems so hopefully you don't have them",
   language: 'en-us',
-  siteUrl: 'https://jordan.in',
+  siteUrl: 'https://stewart.bot',
   theme: 'system', // system, dark or light
-  siteLogo: '/static/images/logo.png',
-  socialBanner: '/static/images/twitter-card.png',
+  siteLogo: '/static/favicons/favicon-32-32.png',
+  socialBanner: '/static/images/twitter-card.png', // I deleted this
   github: 'https://github.com/jordanst3wart',
   linkedin: 'https://www.linkedin.com/in/jordanst3wart/',
   locale: 'en-US',

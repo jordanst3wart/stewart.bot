@@ -69,19 +69,6 @@ npx degit 'timlrx/tailwind-nextjs-starter-blog'
 5. Modify `projectsData.ts`
 6. Modify `headerNavLinks.ts` to customize navigation links
 7. Add blog posts
-8. Deploy on Vercel
-
-## Installation
-
-```bash
-yarn
-```
-
-Please note, that if you are using Windows, you may need to run:
-
-```bash
-set PWD="$(pwd)"
-```
 
 ## Development
 
@@ -174,11 +161,7 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 
 1. Add `output: 'export'` in `next.config.js`. See [static exports documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#configuration) for more information.
 2. Comment out `headers()` from `next.config.js`.
-3. Add `unoptimized: true` to the `images` key in `next.config.js`:
-
-   Alternatively, to continue using `next/image`, you can use an alternative image optimization provider such as Imgix, Cloudinary or Akamai. See [image optimization documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#image-optimization) for more details.
-
-4. Remove `api` folder and components which call the server-side function such as the Newsletter component. Not technically required and the site will build successfully, but the APIs cannot be used as they are server-side functions.
+3. Add `unoptimized: true` to the `images` key in `next.config.js`
 5. Run `yarn build`. The generated static content is in the `out` folder.
 6. Deploy the `out` folder to your hosting service of choice or run `npx serve out` to view the website locally.
 
@@ -186,4 +169,3 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 
 - [How can I add a custom MDX component?](/faq/custom-mdx-component.md)
 - [How can I customize the `kbar` search?](/faq/customize-kbar-search.md)
-- [How do I deploy on Github pages?](/faq/github-pages-deployment.md)

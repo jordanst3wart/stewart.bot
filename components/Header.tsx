@@ -5,7 +5,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
-import SocialIcon from "@/components/social-icons";
+import SocialIcon from '@/components/social-icons'
 
 const Header = () => {
   return (
