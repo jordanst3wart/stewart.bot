@@ -5,6 +5,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import SocialIcon from "@/components/social-icons";
 
 const Header = () => {
   return (
@@ -37,6 +38,8 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
+        <SocialIcon kind="github" href={siteMetadata.github} size={6} />
+        <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
         <SearchButton />
         <ThemeSwitch />
         <MobileNav />
