@@ -5,7 +5,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
 import SocialIcon from '@/components/social-icons'
-import {Logo} from "@/components/Logo";
+import { Logo } from '@/components/Logo'
 
 const Header = () => {
   return (
@@ -14,7 +14,7 @@ const Header = () => {
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           <div className="flex items-center justify-between">
             <div className="mr-3">
-              <Logo/>
+              <Logo />
             </div>
             {typeof siteMetadata.headerTitle === 'string' ? (
               <div className="hidden h-6 text-2xl font-semibold sm:block">

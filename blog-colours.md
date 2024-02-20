@@ -1,7 +1,3 @@
-
-
-
-
 Colours recommended:
 #eeeeee
 #ffffff

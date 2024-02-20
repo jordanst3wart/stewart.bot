@@ -160,8 +160,8 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 1. Add `output: 'export'` in `next.config.js`. See [static exports documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#configuration) for more information.
 2. Comment out `headers()` from `next.config.js`.
 3. Add `unoptimized: true` to the `images` key in `next.config.js`
-5. Run `yarn build`. The generated static content is in the `out` folder.
-6. Deploy the `out` folder to your hosting service of choice or run `npx serve out` to view the website locally.
+4. Run `yarn build`. The generated static content is in the `out` folder.
+5. Deploy the `out` folder to your hosting service of choice or run `npx serve out` to view the website locally.
 
 ## Frequently Asked Questions
 

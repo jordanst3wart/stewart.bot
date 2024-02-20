@@ -3,7 +3,8 @@ const siteMetadata = {
   title: 'Stewart.bot Blog',
   author: 'Jordan Stewart',
   headerTitle: 'Stewart.bot',
-  description: "Heya, I'm Jordan, a fullstack software engineer. I write about my problems so hopefully you don't have them",
+  description:
+    "Heya, I'm Jordan, a fullstack software engineer. I write about my problems so hopefully you don't have them",
   language: 'en-us',
   siteUrl: 'https://stewart.bot',
   theme: 'system', // system, dark or light
