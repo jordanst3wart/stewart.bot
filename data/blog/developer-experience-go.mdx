@@ -1,12 +1,12 @@
 ---
 title: 'Go has an amazing developer experience'
 date: '2024-2-21'
-tags: ['go','developer experience','golang']
+tags: ['go','developer experience','golang','Typescript']
 draft: false
-summary: 'Go has an amazing developer experience from a lot of it's tooling'
+summary: 'Go has an amazing developer experience from a lot of it's tooling, when compared to Typescript'
 ---
 
-I find the development process with TypeScript painful in every step of development due to divergent tooling. Conversely, I enjoy using go as it's very simple in comparison.
+I find the development process with TypeScript painful in every step of development due to divergent tooling. Conversely, I find using go borrowing as it's very simple in comparison.
 
 You can experience this enjoy by simply quickly setting up a basic webserver, as you go through a lot of the steps in the development process. So here we go...
 
@@ -22,7 +22,7 @@ go mod init github.com/jordanst3wart/go-deployment-minimal
 ```
 This creates the go.mod file, which stores the version of go, the package name, and dependencies.
 
-(Now we go straight to coding with Typescript this is step 5)
+(Now we go straight to coding with Typescript this is step 5!!!)
 
 ### 2. write a web server
 
@@ -98,7 +98,7 @@ scp -i ~/.ssh/ec2-key.pem main ec2-user@52.64.95.107:/home/ec2-user/app
 
 Let's run the binary on the server (once again, I can't be bothered to ssh):
 ```shell
-ssh -i ~/.ssh/python-watch-key.pem ec2-user@52.64.95.107 'nohup ./app/main > ./app/application.log &'
+ssh -i ~/.ssh/ec2-key.pem ec2-user@52.64.95.107 'nohup ./app/main > ./app/application.log &'
 ```
 That shell commands isn't perfect as it doesn't exit... but the go binary keeps running.
 
@@ -113,7 +113,11 @@ Let's compare this to the minimistic typescript server I made before:
 - the `go.mod` is 3 lines long compared to the 100 lines we started with in the tsconfig.json file, and the 21 lines of the package.json
 - we have really well-defined error conditions with go, rather than the catch-all of the TypeScript server
 - the binary has to be compiled for ARM, but that is easy with two flags
-- I don't need to install anything on the server
-- I can write a test as `main_test.go` and run that test with `go test` as well
+- I don't need to install anything on the server, instead of having to install a node version manager, node, and the production packages required for Typescript
+- I can copy a single binary to the server instead of two files, and a directory (`dist` directory, `package.json`, and `package-lock.json`)
+- I can write a test as `main_test.go` and run that test with `go test` as well. I don't need a tool, and a config file like with `jest`, or `vitest`
+- instead of interacting with `npm`, `node`, `tsc`, and potentially `vitest`, I call `go mod ...`, `go run ...`, `go build ...` and `go get ...`
 
 It's a very stream lined experience, and it's so simple that it's quiet boring.
+
+It's removed several steps in the process, and simplified a lot of the others.
