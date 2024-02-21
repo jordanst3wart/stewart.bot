@@ -6,204 +6,114 @@ draft: false
 summary: 'Go has an amazing developer experience from a lot of it's tooling'
 ---
 
-I find the development process of TypeScript painful in every step of development. I find the TypeScript language good, but I find everything around the language bad.
+I find the development process with TypeScript painful in every step of development due to divergent tooling. Conversely, I enjoy using go as it's very simple in comparison.
 
-In comparsion, I find the Go language from easy in basically every aspect (Check my other most...).
-
-You can experience this headache by simply racing to setup a basic webserver as you go threw most steps quickly. So here we go...
+You can experience this enjoy by simply quickly setting up a basic webserver, as you go through a lot of the steps in the development process. So here we go...
 
 How fast can you deploy a server in TypeScript from scratch?
 
 3... 2... 1... go!
 
-### 1. Make a folder:
+### 1. Initial setup:
 ```
-mkdir typescript-deployment-minimal
+mkdir go-deployment-minimal
+cd go-deployment-minimal
+go mod init github.com/jordanst3wart/go-deployment-minimal
 ```
-### 2. initiate npm
+This creates the go.mod file, which stores the version of go, the package name, and dependencies.
+
+(Now we go straight to coding with Typescript this is step 5)
+
+### 2. write a web server
+
+Create a main file.
 ```shell
-npm init -y
-```
-This creates a lot of values I don't care for like version, description, main, author and license.
-
-### 3. initiate typescript
-```shell
-npm install typescript @types/node --save-dev
-tsc --init # create tsconfig.json
-```
-
-### 4. get stuck looking at tsconfig.json
-The `tsconfig.json` file generated from `tsc --init` is 109 lines long, and has a doesn't have sane defaults...
-
-This is a sane default to have though (I had to look this up on youtube, the documentation isn't great):
-```json
-{
-  "compilerOptions": {
-    "target": "esNext",
-    "module": "NodeNext",
-    "rootDir": "./src",
-    "allowJs": false,
-    "sourceMap": true,
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  }
-}
-```
-It's got a `src` for code and `dist` folder for compiled code (or javascript). You probably don't need `"sourceMap": true,`
-
-### 5. write a web server in src
-
-Let's use fastify as the web server as people would laugh at you if you just use the http module, and express.js is legacy now (no http/2).
-
-```shell
-npm install fastify
+touch main.go
 ```
 
 And let's hit chatgpt to quickly get some code:
-```Typescript
-import fastify from 'fastify';
+```Go
+package main
 
-const server = fastify({
-    logger: true
-});
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
-server.get('/', async (request, reply) => {
-    return { hello: 'world' };
-});
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Received request: %s %s", r.Method, r.URL.Path)
+	// Respond to the request
+	_, err := fmt.Fprintf(w, "Hello, world!")
+	if err != nil {
+		return
+	}
+}
 
-const start = async () => {
-    try {
-        await server.listen({ port: 3000 });
-    } catch (err) {
-        server.log.error(err);
-        process.exit(1);
-    }
-};
-
-start();
+func main() {
+	serverAddress := ":8080"
+	http.HandleFunc("/", helloHandler)
+	log.Printf("Starting server on %s", serverAddress)
+	if err := http.ListenAndServe(serverAddress, nil); err != nil {
+		panic(err)
+	}
+}
 
 ```
+We are using the default go logger, and webserver, which are very popular.
 
-This is great. It's short and we have a logger too. Otherwise we would have had to have installed and configured a logger like `winston`.
+We are also more aware of what errors could occur with writing to the http response.
 
-I wanted to protect you from this, but here is the type of the fastify server:
-```Typescript
-declare function fastify<
-  Server extends http.Server,
-  Request extends RawRequestDefaultExpression<Server> = RawRequestDefaultExpression<Server>,
-  Reply extends RawReplyDefaultExpression<Server> = RawReplyDefaultExpression<Server>,
-  Logger extends FastifyBaseLogger = FastifyBaseLogger,
-  TypeProvider extends FastifyTypeProvider = FastifyTypeProviderDefault,
->(opts?: fastify.FastifyHttpOptions<Server, Logger>): FastifyInstance<Server, Request, Reply, Logger, TypeProvider> & PromiseLike<FastifyInstance<Server, Request, Reply, Logger, TypeProvider>>
-```
-
-To get the port of the server it's:
-```Typescript
-        const address = server.server.address() as AddressInfo
-        address.port
-```
-I have a lost a lot of time to complicated types like these.
+We could create a `src/` directory, but at the moment that feels a bit unnecessary.
 
 ### compile and run
-compile the code with:
+compile and run the code with:
 ```shell
-tsc
-```
-With bigger projects you probably want to move to swc, or the `speedy web compile` for builds as compiling is a lot faster. There is esbuild aswell.
-
-run the code with:
-```shell
-node dist/index.js
+go run main.go
 ```
 
-Sweet...
-
-With more advanced projects you probably want to compile with `swc` the speedy web compiler, or esbuild. I think they are a lot faster they `tsc` or typescript compile.
+You can compile an arm binary with:
+```shell
+GOOS=linux GOARCH=arm64 go build -o main
+```
+The flags of `GOOS` and `GOARCH` look a tiny bit intimidating, and you should compile a binary in a pipeline not locally on a laptop. But this is fine.
 
 ### deploy it - it's not done until it is running in production
-#### setup the server
-
-Let's create a tiny EC2 instance on amazon web services (AWS), like t4g.nano spot instance. We will just use ssh, and scp to setup the server.
-
-Let's connect to the server
+Let's make the binary executable:
 ```shell
-ssh -i ~/.ssh/ec2-key.pem ec2-user@52.64.95.107
+chmod +x main
 ```
 
-Once on the server we need to install node. You would think it is just:
-```shell
-sudo yum install node
-```
-But that doesn't work.
+Let's create a tiny EC2 instance on amazon web services (AWS), like t4g.nano spot instance. We will use ssh, and scp to setup the server.
 
-It's actually:
+Let's make an app directory (I can't to bothered to ssh):
 ```shell
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash # install node version manager
-source ~/.bashrc # load nvm
-nvm install --lts # install long term support version
+ssh -i ~/.ssh/ec2-key.pem ec2-user@52.64.95.107 'mkdir app'
 ```
 
-Let's make a directory for the code as well on the server:
+Let's copy the binary to the server:
 ```shell
-mkdir node
+scp -i ~/.ssh/ec2-key.pem main ec2-user@52.64.95.107:/home/ec2-user/app
 ```
 
-#### move the code to the server, and run the code
-Now the server is setup let's move the code there.
-
+Let's run the binary on the server (once again, I can't be bothered to ssh):
 ```shell
-# copy the package.json file for dependencies
-scp -i ~/.ssh/ec2-key.pem package.json ec2-user@52.64.95.107:/home/ec2-user/node
-# copy the package-lock.json for dependency versions
-scp -i ~/.ssh/ec2-key.pem package-lock.json ec2-user@52.64.95.107:/home/ec2-user/node
-# copy the dist directory for the compiled code
-scp -i ~/.ssh/ec2-key.pem -r dist/ ec2-user@52.64.95.107:/home/ec2-user/node
+ssh -i ~/.ssh/python-watch-key.pem ec2-user@52.64.95.107 'nohup ./app/main > ./app/application.log &'
 ```
-
-Back on the server we need to re-install the packages, and run the code:
-
-```shell
-cd node
-npm install --production # you could copy the node_modules, but i think installing is more safer
-# the production flag seem you don't install devDependencies
-# now let's run the server:
-nohup node dist/index.js > application.log &
-```
-`nohup` mean no hang up, it prevents the linux server from shutting now the process. `&` runs the process in the background.
+That shell commands isn't perfect as it doesn't exit... but the go binary keeps running.
 
 ### thoughts on developer experience
 
-And that's it, we have a server listening on port 3000, serving content.
+And that's it, we have a server listening on port 8080, serving content. As a bonus you get `go fmt` to format your code.
 
-I can deploy a web server somewhat quickly, but I felt pain on basically every step:
-- The package.json file has a lot of garbage in it, which annoys me
-- I get overwhelmed by the tsconfig.json file being 100 lines of options from `tsc --init`
-- The types of some objects are crazy.
-- Compiling can run into issues with misconfigured tsconfig.json, and with bigger projects you would want to move to the speedy web compiler `swc` for a lot more speed
-- on the server I needed to install node, a node version manager and the libraries again, and scp a directory
-- writing a test you need another tool (see below)
+I can deploy a web server extremely quickly, I didn't even use an IDE, and I feel no confusion or frustration.
 
-We also missed out on setting up prettier, and eslint, and sharing code between projects, and workspaces, which can be very confusing.
+Let's compare this to the minimistic typescript server I made before:
+- instead of a `package.json`, `package-lock.json`, `tsconfig.json` (and maybe .prettier, and .eslintrc) we have a `go.mod` file that was auto generated as is
+- the `go.mod` is 3 lines long compared to the 100 lines we started with in the tsconfig.json file, and the 21 lines of the package.json
+- we have really well-defined error conditions with go, rather than the catch-all of the TypeScript server
+- the binary has to be compiled for ARM, but that is easy with two flags
+- I don't need to install anything on the server
+- I can write a test as `main_test.go` and run that test with `go test` as well
 
-I did enjoy the good library support though.
-
-Check my other post on how this compares to Go language.
-
-### bonus... setting up testing
-Here is a bonus of setting up tests with node. You can use jest, or vitest. I'm using vitest as it's more modern.
-
-```shell
-npm install -D vitest
-```
-
-You generally need `vitest.config.ts` file, and to add the test script to package.json.
-
-From there you write tests in the file like `.test.ts`.
-
-
-### References:
-1. How to install node on amazon linux:
-https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+It's a very stream lined experience, and it's so simple that it's quiet boring.

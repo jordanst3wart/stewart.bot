@@ -1,16 +1,14 @@
 ---
-title: 'Typescript has terrible developer experience'
+title: 'Go has an amazing developer experience'
 date: '2024-2-21'
-tags: ['typescript','developer experience']
+tags: ['Typescript','developer experience','node']
 draft: false
-summary: 'Typescript has a terrible developer experience from a lot of it's tooling'
+summary: 'Go has an amazing developer experience from a lot of it's tooling'
 ---
 
-I find the development process of TypeScript painful in every step of development. I find the TypeScript language good, but I find everything around the language bad.
+I find the development process with TypeScript painful in every step of development due to divergent tooling. I find the TypeScript language good, but I find everything around the language bad. In comparsion, I find the Go language from easy in basically every aspect (Check my other most...).
 
-In comparsion, I find the Go language from easy in basically every aspect (Check my other most...).
-
-You can experience this headache by simply racing to setup a basic webserver as you go threw most steps quickly. So here we go...
+You can experience this headache setting up a basic webserver, as you go through a lot of the steps in the development process. So here we go...
 
 How fast can you deploy a server in TypeScript from scratch?
 
@@ -31,6 +29,7 @@ This creates a lot of values I don't care for like version, description, main, a
 npm install typescript @types/node --save-dev
 tsc --init # create tsconfig.json
 ```
+This creates the tsconfig.json, required for Typescript.
 
 ### 4. get stuck looking at tsconfig.json
 The `tsconfig.json` file generated from `tsc --init` is 109 lines long, and has a doesn't have sane defaults...
@@ -122,6 +121,14 @@ node dist/index.js
 Sweet...
 
 With more advanced projects you probably want to compile with `swc` the speedy web compiler, or esbuild. I think they are a lot faster they `tsc` or typescript compile.
+
+As an aside to run Typescript code with bun, it is just:
+```shell
+bun run index.ts
+```
+
+You are generally stepping through two tools to run and compile.
+
 
 ### deploy it - it's not done until it is running in production
 #### setup the server
