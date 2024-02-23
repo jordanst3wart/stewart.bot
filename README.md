@@ -1,3 +1,11 @@
+
+- Tags page is broken...
+- need to find a way to invalidate the cache
+- s3 link is http://stewart.bot.s3-website-us-east-1.amazonaws.com/
+
+aws cloudfront create-invalidation --distribution-id E2WLKPSIG60UDN --paths "/*"
+
+
 ![tailwind-nextjs-banner](/public/static/images/twitter-card.png)
 
 # Tailwind Nextjs Starter Blog
