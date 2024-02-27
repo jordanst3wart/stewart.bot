@@ -1,7 +1,7 @@
 ---
 title: 'Go has an amazing developer experience'
 date: '2024-2-21'
-tags: ['go','developer experience','golang','Typescript']
+tags: ['go', 'developer experience', 'golang', 'Typescript']
 draft: false
 summary: 'Go has an amazing developer experience when compared to Typescript'
 ---
@@ -15,11 +15,13 @@ How fast can you deploy a server in TypeScript from scratch?
 3... 2... 1... go!
 
 ### 1. Initial setup:
+
 ```
 mkdir go-deployment-minimal
 cd go-deployment-minimal
 go mod init github.com/jordanst3wart/go-deployment-minimal
 ```
+
 This creates the go.mod file, which stores the version of go, the package name, and dependencies.
 
 (Now we go straight to coding with Typescript this is step 5!!!)
@@ -27,11 +29,13 @@ This creates the go.mod file, which stores the version of go, the package name, 
 ### 2. write a web server
 
 Create a main file.
+
 ```shell
 touch main.go
 ```
 
 And let's hit chatgpt to quickly get some code:
+
 ```Go
 package main
 
@@ -60,6 +64,7 @@ func main() {
 }
 
 ```
+
 We are using the default go logger, and webserver, which are very popular.
 
 We are also more aware of what errors could occur with writing to the http response.
@@ -67,19 +72,25 @@ We are also more aware of what errors could occur with writing to the http respo
 We could create a `src/` directory, but at the moment that feels a bit unnecessary.
 
 ### compile and run
+
 compile and run the code with:
+
 ```shell
 go run main.go
 ```
 
 You can compile an arm binary with:
+
 ```shell
 GOOS=linux GOARCH=arm64 go build -o main
 ```
+
 The flags of `GOOS` and `GOARCH` look a tiny bit intimidating, and you should compile a binary in a pipeline not locally on a laptop. But this is fine.
 
 ### deploy it - it's not done until it is running in production
+
 Let's make the binary executable:
+
 ```shell
 chmod +x main
 ```
@@ -87,19 +98,23 @@ chmod +x main
 Let's create a tiny EC2 instance on amazon web services (AWS), like t4g.nano spot instance. We will use ssh, and scp to setup the server.
 
 Let's make an app directory (I can't to bothered to ssh):
+
 ```shell
 ssh -i ~/.ssh/ec2-key.pem ec2-user@52.64.95.107 'mkdir app'
 ```
 
 Let's copy the binary to the server:
+
 ```shell
 scp -i ~/.ssh/ec2-key.pem main ec2-user@52.64.95.107:/home/ec2-user/app
 ```
 
 Let's run the binary on the server (once again, I can't be bothered to ssh):
+
 ```shell
 ssh -i ~/.ssh/ec2-key.pem ec2-user@52.64.95.107 'nohup ./app/main > ./app/application.log &'
 ```
+
 That shell commands isn't perfect as it doesn't exit... but the go binary keeps running.
 
 ### thoughts on developer experience
@@ -109,6 +124,7 @@ And that's it, we have a server listening on port 8080, serving content. As a bo
 I can deploy a web server extremely quickly, I didn't even use an IDE, and I feel no confusion or frustration.
 
 Let's compare this to the minimistic typescript server I made before:
+
 - instead of a `package.json`, `package-lock.json`, `tsconfig.json` (and maybe .prettier, and .eslintrc) we have a `go.mod` file that was auto generated as is
 - the `go.mod` is 3 lines long compared to the 100 lines we started with in the tsconfig.json file, and the 21 lines of the package.json
 - we have really well-defined error conditions with go, rather than the catch-all of the TypeScript server
