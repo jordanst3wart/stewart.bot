@@ -85,22 +85,20 @@ This works, but doesn't look the best. This is where `react-query` comes in. `re
   if (isLoading) return <div>Loading...</div>;
 ```
 
-This looks a lot nicer than useEffect. You do have to learn the react-query library though. It's worth mentioning a lot of libraries are changing to `useSignal` like Solid.js, preact, and qwik. You can use preact signals in react apps by using `@preact/signals-react` library.
+This looks a lot nicer than useEffect. You do have to learn the react-query library though. It also might not be the best managing state that says on the frontend, like writing cookies, saving to local storage, is the camera on, or off and is the microphone on, or off. It's worth mentioning a lot of libraries are changing to `useSignal` like Solid.js, preact, and qwik. You can use preact signals in react apps by using `@preact/signals-react` library.
+
+The `useSignal` is using the observer pattern, rather than the state machine pattern used by redux.
+
+As an aside, apparently useContext might not be the best, even though it's available from the react library.
 
 ### 3. And finally if you do have complicated state in the frontend there are better, and simplier alternatives, such as Zustand, and Jotai
 
-If using `react-query`, and `useState` is not enough for your application, then you can use `Zustand`, and `Jotai`.
+I have not deeply looked into these libraries, but Jotai uses atoms similar to how signals work in preact, and Solid.js, and Zustand is a slimmer version of redux, with more simple syntax.
 
-something about atoms
-`Zustand` is a library that is used to handle state in the frontend. It is a lot simpler than using `redux`. You can use `Zustand` like:
+They offer lighter syntax, and offer more of a library approach rather than a framework.
 
-```javascript
-```
-
-`jotai`
-
-
-
-
-### Referecnes:
+### Post Script
+Lastly, this is a great resource:
 Theo - t3․gg - You still use Redux? https://www.youtube.com/watch?v=5-1LM2NySR0
+
+A lot of the state manage on the frontend has changed dynamically in the last few years, but I think it is converging around signals.
