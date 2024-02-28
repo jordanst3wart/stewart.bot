@@ -3,17 +3,18 @@
 - s3 link is http://stewart.bot.s3-website-us-east-1.amazonaws.com/
 
 Invalidate the cache like:
+
 ```shell
 aws --profile personal cloudfront create-invalidation --distribution-id E2WLKPSIG60UDN --paths "/*"
 ```
 
-
-
 # Tailwind Nextjs Starter Blog
+
 here: https://github.com/timlrx/tailwind-nextjs-starter-blog
 
 ## Features
-- 
+
+-
 - [Contentlayer](https://www.contentlayer.dev/) to manage content logic
 - [MDX - write JSX in markdown documents!](https://mdxjs.com/)
 - Near perfect lighthouse score - [Lighthouse report](https://www.webpagetest.org/result/230805_BiDcBQ_4H7)
@@ -156,25 +157,24 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 - [How can I add a custom MDX component?](/faq/custom-mdx-component.md)
 - [How can I customize the `kbar` search?](/faq/customize-kbar-search.md)
 
-
 Cloud function to add html extension to the end of the url
+
 ```javascript
-'use-strict';
+'use-strict'
 function handler(event) {
-    var request = event.request;
-    var uri = request.uri;
-    if (uri.endsWith('/')) {
-        request.uri += 'index.html';
-    }
-    else if (!uri.includes('.')) {
-        request.uri += '.html';
-    }
-    return request;
+  var request = event.request
+  var uri = request.uri
+  if (uri.endsWith('/')) {
+    request.uri += 'index.html'
+  } else if (!uri.includes('.')) {
+    request.uri += '.html'
+  }
+  return request
 }
 ```
 
-
 # Blog ideas
+
 - leptos
 - vercel hosting vs aws s3 cloudfront
 - redux not needed (better alternatives, htmx, and frontend alternatives...)
