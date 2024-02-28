@@ -155,3 +155,26 @@ canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-t
 
 - [How can I add a custom MDX component?](/faq/custom-mdx-component.md)
 - [How can I customize the `kbar` search?](/faq/customize-kbar-search.md)
+
+
+Cloud function to add html extension to the end of the url
+```javascript
+'use-strict';
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+    if (uri.endsWith('/')) {
+        request.uri += 'index.html';
+    }
+    else if (!uri.includes('.')) {
+        request.uri += '.html';
+    }
+    return request;
+}
+```
+
+
+# Blog ideas
+- leptos
+- vercel hosting vs aws s3 cloudfront
+- redux not needed (better alternatives, htmx, and frontend alternatives...)
