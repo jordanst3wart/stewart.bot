@@ -178,3 +178,8 @@ function handler(event) {
 - leptos
 - vercel hosting vs aws s3 cloudfront
 - redux not needed (better alternatives, htmx, and frontend alternatives...)
+
+
+Google stuff
+https://search.google.com/search-console/welcome?utm_source=about-page
+analytics
