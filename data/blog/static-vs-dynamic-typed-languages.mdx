@@ -1,17 +1,17 @@
 ---
-title: Explore trade-offs of dynamic vs static typing
-date: '2024-02-18'
+title: Exploring trade-offs of dynamic vs static typing
+date: '2024-07-06'
 tags: ['python', 'static', 'prototype pattern']
 draft: false
 summary: Every new programming language has either a type system or has a type spec to support compile time checks.
 ---
 
-I've been working with Python, and I've found that I've started adding in types more and more to Python functions. I've worked with other dynamic type languages, and didn't really believe the type system was not critical, but now I seem to be relying on it more and more.
+I've been working with Python, and I've started aggressively adding in optional types to functions. I've worked with other dynamic type languages, and didn't really believe the type system was not critical, but now I seem to be relying on it more and more.
 
 I feel two things:
 
 1. Getting language server feedback at development time is amazing.
-2. Some types are over-complicated, and I lose time to them
+2. Some types are over-complicated, and I lose time to them (but rarely)
 
 As an example of the first: I was inputting a dictionary, when a list, to a rarely called python function that was handling errors. So the flow should something like: network error-> error handling code -> typed error. It took me a week to find the error.
 
