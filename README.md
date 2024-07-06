@@ -21,43 +21,13 @@ here: https://github.com/timlrx/tailwind-nextjs-starter-blog
 - Font optimization with [next/font](https://nextjs.org/docs/app/api-reference/components/font)
 - Integration with [pliny](https://github.com/timlrx/pliny) that provides:
   - Multiple analytics options including [Umami](https://umami.is/), [Plausible](https://plausible.io/), [Simple Analytics](https://simpleanalytics.com/), Posthog and Google Analytics
-  - Command palette search with [Kbar](https://github.com/timc1/kbar) or Algolia
 - Server-side syntax highlighting with line numbers and line highlighting via [rehype-prism-plus](https://github.com/timlrx/rehype-prism-plus)
 - Math display supported via [KaTeX](https://katex.org/)
 - Citation and bibliography support via [rehype-citation](https://github.com/timlrx/rehype-citation)
 - Automatic image optimization via [next/image](https://nextjs.org/docs/basic-features/image-optimization)
 - Support for tags - each unique tag will be its own page
-- 3 different blog layouts
-- 2 different blog listing layouts
-- Support for nested routing of blog posts
 - Projects page
 - Preconfigured security headers
-- SEO friendly with RSS feed, sitemaps and more!
-
-## Sample posts
-
-- [A markdown guide](https://tailwind-nextjs-starter-blog.vercel.app/blog/github-markdown-guide)
-- [Learn more about images in Next.js](https://tailwind-nextjs-starter-blog.vercel.app/blog/guide-to-using-images-in-nextjs)
-- [A tour of math typesetting](https://tailwind-nextjs-starter-blog.vercel.app/blog/deriving-ols-estimator)
-- [Simple MDX image grid](https://tailwind-nextjs-starter-blog.vercel.app/blog/pictures-of-canada)
-- [Example of long prose](https://tailwind-nextjs-starter-blog.vercel.app/blog/the-time-machine)
-- [Example of Nested Route Post](https://tailwind-nextjs-starter-blog.vercel.app/blog/nested-route/introducing-multi-part-posts-with-nested-routing)
-
-## Quick Start Guide
-
-1. Clone the repo
-
-```bash
-npx degit 'timlrx/tailwind-nextjs-starter-blog'
-```
-
-2. Personalize `siteMetadata.js` (site related information)
-3. Modify the content security policy in `next.config.js` if you want to use
-   other analytics provider or a commenting solution other than giscus.
-4. Personalize `authors/default.md` (main author)
-5. Modify `projectsData.ts`
-6. Modify `headerNavLinks.ts` to customize navigation links
-7. Add blog posts
 
 ## Development
 
@@ -135,51 +105,22 @@ lastmod: '2021-01-18'
 tags: ['next-js', 'tailwind', 'guide']
 draft: false
 summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
-images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
-authors: ['default', 'sparrowhawk']
+images: ['/static/images/some.jpg']
+authors: ['default']
 layout: PostLayout
 canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-tailwind-nextjs-starter-blog
 ---
-```
-
-## Deploy
-
-**Static hosting services / GitHub Pages / S3 / Firebase etc.**
-
-1. Add `output: 'export'` in `next.config.js`. See [static exports documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports#configuration) for more information.
-2. Comment out `headers()` from `next.config.js`.
-3. Add `unoptimized: true` to the `images` key in `next.config.js`
-4. Run `yarn build`. The generated static content is in the `out` folder.
-5. Deploy the `out` folder to your hosting service of choice or run `npx serve out` to view the website locally.
-
-## Frequently Asked Questions
-
-- [How can I add a custom MDX component?](/faq/custom-mdx-component.md)
-- [How can I customize the `kbar` search?](/faq/customize-kbar-search.md)
-
-Cloud function to add html extension to the end of the url
-
-```javascript
-'use-strict'
-function handler(event) {
-  var request = event.request
-  var uri = request.uri
-  if (uri.endsWith('/')) {
-    request.uri += 'index.html'
-  } else if (!uri.includes('.')) {
-    request.uri += '.html'
-  }
-  return request
-}
 ```
 
 # Blog ideas
 
 - leptos
 - vercel hosting vs aws s3 cloudfront
-- redux not needed (better alternatives, htmx, and frontend alternatives...)
-
+- static vs dynamic typed languages
 
 Google stuff
 https://search.google.com/search-console/welcome?utm_source=about-page
 analytics
+
+Google web search console docs:
+https://support.google.com/webmasters/answer/9128669?utm_source=wnc_20079900&utm_medium=panel&utm_campaign=wnc_20079900&utm_content=msg_20079900&hl=en-GB#zippy=%2Cnot-much-time-to-manage-my-site%2Cweb-developer

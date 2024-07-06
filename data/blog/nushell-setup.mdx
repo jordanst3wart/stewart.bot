@@ -33,29 +33,30 @@ I think I can learn to write that whilst not breaking my flow.
 
 For reference, I tried out Elvish shell as well, and I found the missing `history` command to be a deal breaker for me. You can use Ctrl-R in Elvish for history (I think), but I have to look that up every time as well.
 
-
 I found installing nushell easy, with `nix` package manager on MacOs, but I had two problems:
+
 1. adding custom commands in a modular way
 2. setting up PATH
-You can see how I solved these problems below.
-
+   You can see how I solved these problems below.
 
 You can find the config directory of nushell with this command:
+
 ```nu
 $nu.default-config-dir
 ```
 
 The `config.nu` file is quiet long:
+
 ```nu
 ❯ wc -l config.nu
      743 config.nu
 ```
 
 So I didn't want to edit that file, and I wanted to keep my custom commands separate. I created a `custom.nu` file in that directory, and added the following command in `env.nu` to load the custom file on startup:
+
 ```nu
 source ($nu.default-config-dir | path join 'custom.nu')
 ```
-
 
 I think a nice way to add to PATH is:
 
@@ -85,7 +86,6 @@ $env.PATH = ($env.PATH |
 # filter so the paths are unique
 $env.PATH = ($env.PATH | uniq)
 ```
-
 
 I also added some custom commands to `custom.nu`, like:
 
