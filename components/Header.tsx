@@ -3,7 +3,6 @@ import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
-import SearchButton from './SearchButton'
 import SocialIcon from '@/components/social-icons'
 import { Logo } from '@/components/Logo'
 
@@ -40,7 +39,6 @@ const Header = () => {
           ))}
         <SocialIcon kind="github" href={siteMetadata.github} size={6} />
         <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={6} />
-        <SearchButton />
         <ThemeSwitch />
         <MobileNav />
       </div>
