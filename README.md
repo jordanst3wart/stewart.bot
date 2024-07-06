@@ -124,3 +124,7 @@ analytics
 
 Google web search console docs:
 https://support.google.com/webmasters/answer/9128669?utm_source=wnc_20079900&utm_medium=panel&utm_campaign=wnc_20079900&utm_content=msg_20079900&hl=en-GB#zippy=%2Cnot-much-time-to-manage-my-site%2Cweb-developer
+
+DSLs
+
+AWS IAM vs other authenication methods (or AWS vs everyone)
