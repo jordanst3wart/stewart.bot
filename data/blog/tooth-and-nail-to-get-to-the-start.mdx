@@ -19,10 +19,12 @@ Python is hard to deploy, and hard to install. It's common for a library to inst
 A lot of python packages are targeted to small scripts, and not larger programs. This means their error handling is lack luster. With a small script, or in a jupyter notebook, it is fine to just log errors. In a larger program running on a server. If a package/library logs an error, it's extremely confusing. You don't know where that function was called, and you don't get any stack trace.
 
 Python has gone through an odd 'pythonic' phrase, and has a lot of built magic methods or special methods. Pythonic code may have encouraged the use of really dense hard to understand code like:
+
 ```
 def collect_account_ids_from_arns(arns):
     return { matched.groupdict()["account_id"] for arn in arns if (matched := re.match(ARN_REGEX, arn)) is not None }
 ```
+
 Good luck understanding that on your Thursday afternoon.
 
 Pythons built in methods are a bit unintuitive. For example`__repr__` and `__str__`, could it be just a string function, and how is `__repr__` different? Could `__init__` just be `init()`? Could `__del__` just be `delete`, and`__len__` could that just be `len()`. There is also `__contains__`, `__setitem__`, `__iter__`, `__next__`, `__call__`, `__eq__`, `__exit__`, `__enter__`, `__new__` and `__add__`. These really seem there just to confuse people.

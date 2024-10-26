@@ -9,6 +9,7 @@ summary: How I setup git with a personal and company profiles
 I just wanted to show how I got a company and personal git profile on the same computer.
 
 This is my ~/.gitconfig file (take note of the `gitdir`):
+
 ```toml
 [core]
   excludesFile = ~/.gitignore_global
@@ -29,6 +30,7 @@ This is my ~/.gitconfig file (take note of the `gitdir`):
 So any work I do in `~/company/` uses the company git profile, whilst any work I do in `~/Documents`, uses my personal git profile.
 
 The file `~/.gitconfig_company` is just:
+
 ```toml
 [User]
   email = username@company.com
@@ -41,6 +43,7 @@ The file `~/.gitconfig_company` is just:
 ```
 
 And my personal gitconfig is at `.gitconfig_personal` and looks like:
+
 ```
 [user]
    name = jordanst3wart
