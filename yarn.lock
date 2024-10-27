@@ -3398,20 +3398,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.5.7":
-  version: 0.5.7
-  resolution: "@tailwindcss/forms@npm:0.5.7"
+"@tailwindcss/forms@npm:^0.5.9":
+  version: 0.5.9
+  resolution: "@tailwindcss/forms@npm:0.5.9"
   dependencies:
     mini-svg-data-uri: ^1.2.3
   peerDependencies:
-    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1"
-  checksum: 406fe102a44f89d896c9a945b705a40b926520472ffd8613d9fbfb9e63c23d600629f54096b8ba78316ce1278b79ae6070c166b820328256cf359e80f9d2146f
+    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20"
+  checksum: b242012974e1727d6c220076a713cd98218f0060a31fe09baf9cf712089fedc3c450242cf29b4b19ca2f7a96f99e11692b75a142f5f148709f500f8a61687f17
   languageName: node
   linkType: hard
 
-"@tailwindcss/typography@npm:^0.5.13":
-  version: 0.5.13
-  resolution: "@tailwindcss/typography@npm:0.5.13"
+"@tailwindcss/typography@npm:^0.5.15":
+  version: 0.5.15
+  resolution: "@tailwindcss/typography@npm:0.5.15"
   dependencies:
     lodash.castarray: ^4.4.0
     lodash.isplainobject: ^4.0.6
@@ -3419,7 +3419,7 @@ __metadata:
     postcss-selector-parser: 6.0.10
   peerDependencies:
     tailwindcss: "*"
-  checksum: 44ee7417de2aa1facd3e5a85dfc509d94f8bfec1fe422a75f141cb6bf5f19e1da31c060fc7aa1b8f880bd98c1fc6210cf5b5124a20335b1a3cd6b3e1a2476c25
+  checksum: 4e7ad4f7cf0e290030de63f123b53b431fdc3b0fc76e43b9abe21945cf9eca59b7d0d557bb6c7ebd16769586b22ca8cf40e75dc6db069a3afac4c678f4e4ed1e
   languageName: node
   linkType: hard
 
@@ -9782,7 +9782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.23, postcss@npm:^8.4.39":
+"postcss@npm:^8.4.23":
   version: 8.4.39
   resolution: "postcss@npm:8.4.39"
   dependencies:
@@ -9790,6 +9790,17 @@ __metadata:
     picocolors: ^1.0.1
     source-map-js: ^1.2.0
   checksum: 14b130c90f165961772bdaf99c67f907f3d16494adf0868e57ef68baa67e0d1f6762db9d41ab0f4d09bab6fb7888588dba3596afd1a235fd5c2d43fba7006ac6
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.4.47":
+  version: 8.4.47
+  resolution: "postcss@npm:8.4.47"
+  dependencies:
+    nanoid: ^3.3.7
+    picocolors: ^1.1.0
+    source-map-js: ^1.2.1
+  checksum: f78440a9d8f97431dd2ab1ab8e1de64f12f3eff38a3d8d4a33919b96c381046a314658d2de213a5fa5eb296b656de76a3ec269fdea27f16d5ab465b916a0f52c
   languageName: node
   linkType: hard
 
@@ -11038,6 +11049,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"source-map-js@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "source-map-js@npm:1.2.1"
+  checksum: 4eb0cd997cdf228bc253bcaff9340afeb706176e64868ecd20efbe6efea931465f43955612346d6b7318789e5265bdc419bc7669c1cebe3db0eb255f57efa76b
+  languageName: node
+  linkType: hard
+
 "source-map-support@npm:^0.5.21":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
@@ -11098,8 +11116,8 @@ __metadata:
   dependencies:
     "@next/bundle-analyzer": 14.2.3
     "@svgr/webpack": ^8.0.1
-    "@tailwindcss/forms": ^0.5.7
-    "@tailwindcss/typography": ^0.5.13
+    "@tailwindcss/forms": ^0.5.9
+    "@tailwindcss/typography": ^0.5.15
     "@types/mdx": ^2.0.13
     "@types/react": ^18.2.73
     "@typescript-eslint/eslint-plugin": ^6.21.0
@@ -11121,7 +11139,7 @@ __metadata:
     next-contentlayer2: 0.5.1
     next-themes: ^0.3.0
     pliny: 0.2.1
-    postcss: ^8.4.39
+    postcss: ^8.4.47
     prettier: ^3.3.2
     prettier-plugin-tailwindcss: ^0.6.5
     react: 18.3.1
