@@ -130,8 +130,4 @@ DSLs
 AWS IAM vs other authenication methods (or AWS vs everyone)
 
 pliny bump
-
-yarn upgrade-interactive --latest
-
-remove:
-readingTime
+next bump to 15

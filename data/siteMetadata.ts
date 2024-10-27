@@ -10,7 +10,6 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteLogo: '/static/favicons/favicon-32-32.png',
   metadataBase: new URL('https://stewart.bot'),
-  socialBanner: '/static/images/twitter-card.png', // I deleted this :/
   github: 'https://github.com/jordanst3wart',
   linkedin: 'https://www.linkedin.com/in/jordanst3wart/',
   locale: 'en-US',
