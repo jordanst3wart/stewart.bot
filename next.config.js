@@ -1,6 +1,5 @@
 const { withContentlayer } = require('next-contentlayer2')
 
-
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
