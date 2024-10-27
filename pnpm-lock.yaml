@@ -42,8 +42,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       pliny:
-        specifier: 0.2.1
-        version: 0.2.1(@algolia/client-search@4.24.0)(@types/react@18.3.12)(acorn@8.13.0)(esbuild@0.24.0)(next@14.2.16(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.2)
+        specifier: 0.2.2
+        version: 0.2.2(@algolia/client-search@4.24.0)(@types/react@18.3.12)(acorn@8.13.0)(esbuild@0.24.0)(next@14.2.16(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.2)
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
@@ -3574,8 +3574,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  pliny@0.2.1:
-    resolution: {integrity: sha512-gPPDbxq2CydTyJsaCcVntFyjvpWfJ7dJ4uFcLcWN2KWKbpMul2+J9niqj0PNfbyvK1kKLe6UIgCVc4VtxfNVNA==}
+  pliny@0.2.2:
+    resolution: {integrity: sha512-pBKhxNNeSmTKDmI7AVXxOIX0GIP6cAQvgnrZ+VpRXjPeNHbYpTKOS825PSLx1JTIJQNa6Q51sanovCmNTdkV7g==}
     peerDependencies:
       next: '>=13.0.0'
       react: ^17.0.2 || ^18.0.0
@@ -8863,7 +8863,7 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  pliny@0.2.1(@algolia/client-search@4.24.0)(@types/react@18.3.12)(acorn@8.13.0)(esbuild@0.24.0)(next@14.2.16(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.2):
+  pliny@0.2.2(@algolia/client-search@4.24.0)(@types/react@18.3.12)(acorn@8.13.0)(esbuild@0.24.0)(next@14.2.16(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.2):
     dependencies:
       '@docsearch/react': 3.6.2(@algolia/client-search@4.24.0)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.2)
       '@giscus/react': 3.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

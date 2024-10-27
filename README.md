@@ -129,5 +129,7 @@ DSLs
 
 AWS IAM vs other authenication methods (or AWS vs everyone)
 
-pliny bump
+pliny I should inline the pliny library it's really small.
 next bump to 15
+
+
