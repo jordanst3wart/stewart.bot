@@ -132,3 +132,5 @@ AWS IAM vs other authenication methods (or AWS vs everyone)
 pliny bump
 eslint bump
 
+yarn upgrade-interactive --latest
+
