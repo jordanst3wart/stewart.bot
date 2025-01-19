@@ -5,14 +5,6 @@ export type MDXDocument = Document & { body: MDX }
 export type MDXDocumentDate = MDXDocument & {
   date: string
 }
-export type MDXBlog = MDXDocumentDate & {
-  tags?: string[]
-  draft?: boolean
-}
-
-export type MDXAuthor = MDXDocument & {
-  name: string
-}
 
 export const formatDate = (date: string, locale = 'en-US') => {
   const options: Intl.DateTimeFormatOptions = {
@@ -79,15 +71,4 @@ export function dateSortDesc(a: string, b: string) {
   if (a > b) return -1
   if (a < b) return 1
   return 0
-}
-
-/**
- * Kept for backwards compatibility
- * Please use `sortPosts` instead
- * @deprecated
- * @param {MDXBlog[]} allBlogs
- * @return {*}
- */
-export function sortedBlogPost(allBlogs: MDXDocumentDate[]) {
-  return sortPosts(allBlogs)
 }

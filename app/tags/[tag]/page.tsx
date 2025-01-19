@@ -7,8 +7,13 @@ import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
 import { allCoreContent, sortPosts } from '../../pliny'
 
-export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
-  const tag = decodeURI(params.tag)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tag: string }>
+}): Promise<Metadata> {
+  const encodedTags = (await params).tag
+  const tag = decodeURI(encodedTags)
   return genPageMetadata({
     title: tag,
     description: `${siteMetadata.title} ${tag} tagged content`,
@@ -26,8 +31,9 @@ export const generateStaticParams = async () => {
   }))
 }
 
-export default function TagPage({ params }: { params: { tag: string } }) {
-  const tag = decodeURI(params.tag)
+export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
+  const encodedTags = (await params).tag
+  const tag = decodeURI(encodedTags)
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const filteredPosts = allCoreContent(
