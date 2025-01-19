@@ -29,12 +29,24 @@ my-stuff/
 ```
 ref: https://codeberg.org/leiningen/leiningen/src/branch/stable/doc/TUTORIAL.md#creating-a-project
 
-It blows my mind that you can have a single folder `my_stuff` as the namespace folder. I learn the importance of jdk namespaces from Rich Hickey. It's really important to not have namespaces leak out into the system, and it's easier. So It's surprising to see this.
+It blows my mind that you can have a single folder `my_stuff` as the namespace folder. I learn the importance of jdk namespaces from Rich Hickey, the creator of clojure. He said it's really important to not have namespaces leak out into the system. So It's surprising to see this. I always assume there is some hidden danger in not using really long namespaces. But if a well used build tools recommends this approach we might be able to skip at least some of the long namespaces around. Such as you can see in enterprise buzzfizz here: https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition/tree/uinverse/src/main/java/com/seriouscompany/business/java/fizzbuzz/packagenamingpackage/interfaces/parameters
 
-But if a well used build tools recommends this approach we might be able to skip at least some of the long spaces you see. Such as you can see in enterprise buzzfizz here: https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition/tree/uinverse/src/main/java/com/seriouscompany/business/java/fizzbuzz/packagenamingpackage/interfaces/parameters
-
-The standard layout of JDK projects is the maven layout, which you can find here:
-ref: https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
+The standard layout of JDK projects is the maven layout looks like:
+```
+src/main/java/         # Application/Library sources
+src/main/resources/    # Application/Library resources
+src/main/filters/     # Resource filter files
+src/main/webapp/      # Web application sources
+src/test/java/        # Test sources
+src/test/resources/   # Test resources
+src/test/filters/    # Test resource filter files
+src/it/              # Integration Tests
+src/assembly/        # Assembly descriptors
+src/site/           # Site documentation
+target/             # Generated output (compiled classes, JAR files, etc.)
+pom.xml             # Project Object Model (project configuration)
+```
+You can see it here: https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
 
 The standard maven layout has things I have never seen in a JDK project in the maybe 8 years I have been an engineer, like `src/main/filters`.
 
