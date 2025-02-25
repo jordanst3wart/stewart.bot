@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Jordan Stewart',
   headerTitle: 'Stewart.bot',
   description:
-    "Heya, I'm Jordan, a fullstack software engineer. I write about my problems so hopefully you don't have them",
+    "Hi, I'm Jordan, a fullstack software engineer (not just TypeScript). I write about ideas and problems I face so hopefully you don't have them. Any content written is not from an large language model, and the ideas are my own.",
   language: 'en-us',
   siteUrl: 'https://stewart.bot',
   theme: 'system', // system, dark or light
