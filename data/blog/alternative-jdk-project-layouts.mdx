@@ -1,12 +1,13 @@
 ---
 title: Alternative jdk project layouts
 date: '2025-1-19'
-tags: ['jdk', 'maven', 'bazel', 'clojure','leiningen','kotlin']
+tags: ['jdk', 'maven', 'bazel', 'clojure', 'leiningen', 'kotlin']
 draft: false
 summary: 'Alternatives layouts'
 ---
 
 I saw this project layout in Clojure using the Leiningen build tool:
+
 ```
 $ tree -F -a --dirsfirst my-stuff/
 
@@ -27,11 +28,13 @@ my-stuff/
 ├── project.clj
 └── README.md
 ```
+
 ref: https://codeberg.org/leiningen/leiningen/src/branch/stable/doc/TUTORIAL.md#creating-a-project
 
 It blows my mind that you can have a single folder `my_stuff` as the namespace folder. I learn the importance of jdk namespaces from Rich Hickey, the creator of clojure. He said it's really important to not have namespaces leak out into the system. So It's surprising to see this. I always assume there is some hidden danger in not using really long namespaces. But if a well used build tools recommends this approach we might be able to skip at least some of the long namespaces around. Such as you can see in enterprise buzzfizz here: https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition/tree/uinverse/src/main/java/com/seriouscompany/business/java/fizzbuzz/packagenamingpackage/interfaces/parameters
 
 The standard layout of JDK projects is the maven layout looks like:
+
 ```
 src/main/java/         # Application/Library sources
 src/main/resources/    # Application/Library resources
@@ -46,6 +49,7 @@ src/site/           # Site documentation
 target/             # Generated output (compiled classes, JAR files, etc.)
 pom.xml             # Project Object Model (project configuration)
 ```
+
 You can see it here: https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
 
 The standard maven layout has things I have never seen in a JDK project in the maybe 8 years I have been an engineer, like `src/main/filters`.
@@ -72,6 +76,7 @@ The project using kotlin, gradle, and bazel here:
 https://github.com/jordanst3wart/alternative-jdk-layout
 
 The way to setup gradle to use different directories is just:
+
 ```
 sourceSets {
     main {
@@ -91,3 +96,4 @@ sourceSets {
         }
     }
 :
+```

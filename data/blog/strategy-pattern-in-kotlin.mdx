@@ -122,6 +122,7 @@ fun main() {
 This avoids the `when`, and saves 10 lines of code. I think it is a bit nicer, but uses more advanced language features, like enums, and companion objects.
 
 This is what the code looks like inlined:
+
 ```
 package org.example
 
@@ -149,12 +150,14 @@ fun main() {
 It saves a further 20 lines of code, doesn't use advanced language features, has less redirection, and is easier to read. This example is potentially not that straight forward as generally a strategy would have significant more code, and more complexity than addition, and substraction. It's worth pointing out though that you shouldn't just default to a design pattern.
 
 I've been thinking about Elon Musk's 5 step process in design and engineering, and step one and two are:
+
 1. Make requirements less dumb: Question and verify each requirement to make it less error-prone.
 2. Delete the part or process: Remove unnecessary parts or process steps.
 
 I think in the example above you can use a negative number for substraction, like instead of inputting '1', '2', and 'subtraction', you can just input '1', and '-2'. I think you could also argue that multiple might not be needed, or why is division not there? I think generally in software you have several things you need like addition, subtraction, multiplication, division, exponentiation (like 2^3), root operations (cube root of 8), modulo (7 mod 3 = 1), logarithms (like log₂(8) = 3), sine and cosine operations for a partial calculator app. Or you just need one, like addition. So in this case I would say you just need addition, and subtraction.
 
 So for just addition, and subtraction, the code looks like this:
+
 ```kotlin
 package org.example
 
