@@ -36,7 +36,7 @@ systemctl start httpd
 systemctl enable httpd
 FOO
 ```
-It has a delimiter, which can be any word repeated, in this case 'FOO', and starts with '<<'. It starts with '<<-' for indented heredoc.
+It has a delimiter, which can be any word repeated, in this case 'FOO', and starts with `<<`. It starts with `<<-` for indented heredoc.
 
 Hcl4j parses heredoc fine, but doesn't get the indent right with indented heredoc.
 
