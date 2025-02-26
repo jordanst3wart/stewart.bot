@@ -8,7 +8,9 @@ summary: Making terraform code look slightly nicer
 
 Terraform has two ways to create multiple resources. There is the `for_each` option, and a `count` option. Count creates an array of resources that are number, whereas `for_each` uses the key of the key to store the state of the option against. That is `file[0], file[1]` for count, and `file[hello], file[world]` with `for_each`. It's generally a lot nicer having resources named explicitly. It's often more convenient to name things as well, even if it is just `ec2-instance-1`, and `ec2-instance-2`. Due to this I heavily prefer `for_each` loops over `counts`.
 
+
 `for_each` loops have limited inputs. They allow either a set of strings, that is `toset(["hello", "world"])`, or a map object. Often a set of strings isn't ideal to create a resource, unless it's one resource you want to name.
+
 
 This can look like (naming a single resource with a set):
 
@@ -21,6 +23,7 @@ resource "some_resource" "foo" {
 
 That would create a resource with the name `some_resource.foo["some_name"]`, or something close to that.
 
+
 With a `count` statement, this looks like:
 
 ```hcl
@@ -32,8 +35,8 @@ resource "some_resource" "foo" {
 
 And the resource should be called `some_resource.foo[0]`.
 
-I see a bit of an anti-pattern in terraform when someone has a list, and converts that list to a map to iterate over those resources. It looks like:
 
+I see a bit of an anti-pattern in terraform when someone has a list, and converts that list to a map to iterate over those resources. It looks like:
 ```hcl
 locals {
   some_list_of_objects = [{
@@ -75,6 +78,7 @@ resource "some_resource" "foo" {
 ```
 
 I think the second example is a lot simpler.
+
 
 For completeness, here is an example with an if statement:
 ```hcl
