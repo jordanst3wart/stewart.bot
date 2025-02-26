@@ -75,3 +75,34 @@ resource "some_resource" "foo" {
 ```
 
 I think the second example is a lot simpler.
+
+For completeness, here is an example with an if statement:
+```hcl
+# Define environments with their configurations
+variable "environments" {
+  type = map(object({
+    cidr      = string
+    is_public = bool
+  }))
+  default = {
+    development = { cidr = "10.0.0.0/16", is_public = true },
+    staging     = { cidr = "10.1.0.0/16", is_public = true },
+    production  = { cidr = "10.2.0.0/16", is_public = false }
+  }
+}
+
+# Create public IP addresses only for environments where is_public is true
+resource "some_resource" "foo" {
+  for_each = {
+    for env_name, env_config in var.environments : env_name => env_config
+    if env_config.is_public
+  }
+
+  vpc = true
+
+  tags = {
+    Name = "eip-${each.key}"
+    Environment = each.key
+  }
+}
+```
