@@ -12,7 +12,7 @@ import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
 import { allCoreContent, coreContent, sortPosts } from '../../pliny'
-import { getCustomTitles } from "../../seodata";
+import { getCustomTitles } from '../../seodata'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
