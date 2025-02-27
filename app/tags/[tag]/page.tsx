@@ -3,9 +3,10 @@ import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allBlogs } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
-import { genPageMetadata } from 'app/seo'
+import { genPageMetadata } from '../../seo'
 import { Metadata } from 'next'
 import { allCoreContent, sortPosts } from '../../pliny'
+import { getCustomTitles } from '../../seodata'
 
 export async function generateMetadata({
   params,
@@ -15,7 +16,7 @@ export async function generateMetadata({
   const encodedTags = (await params).tag
   const tag = decodeURI(encodedTags)
   return genPageMetadata({
-    title: tag,
+    title: getCustomTitles(tag),
     description: `${siteMetadata.title} ${tag} tagged content`,
     alternates: {
       canonical: './',

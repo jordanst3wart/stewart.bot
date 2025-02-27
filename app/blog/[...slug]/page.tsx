@@ -12,6 +12,7 @@ import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
 import { allCoreContent, coreContent, sortPosts } from '../../pliny'
+import { getCustomTitles } from '../../seodata'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata | un
   })
 
   return {
-    title: post.title,
+    title: getCustomTitles(post.title),
     description: post.summary,
     openGraph: {
       title: post.title,

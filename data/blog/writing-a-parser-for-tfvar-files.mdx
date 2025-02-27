@@ -26,6 +26,7 @@ hcl4j: 36 (plus one generated)
 I wonder how they got heredoc parsing to work.
 
 Indented heredoc I still don't have support for, but this is normal heredoc:
+
 ```
 user_data2 = <<FOO
 #!/bin/bash
@@ -36,11 +37,13 @@ systemctl start httpd
 systemctl enable httpd
 FOO
 ```
+
 It has a delimiter, which can be any word repeated, in this case 'FOO', and starts with `<<`. It starts with `<<-` for indented heredoc.
 
 Hcl4j parses heredoc fine, but doesn't get the indent right with indented heredoc.
 
 ie.
+
 ```hcl
 user_data2 = <<-FOO
   #!/bin/bash
@@ -53,6 +56,7 @@ FOO
 ```
 
 Should be processed to:
+
 ```text
 #!/bin/bash
 echo "Hello, World!"
@@ -61,4 +65,5 @@ yum install -y httpd
 systemctl start httpd
 systemctl enable httpd
 ```
+
 The two spaces should be removed.
