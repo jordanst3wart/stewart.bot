@@ -2,8 +2,11 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from './pliny'
+import { genPageMetadata } from './seo'
 
 const MAX_DISPLAY = 100
+
+export const metadata = genPageMetadata({ title: 'Web Development Subjects' })
 
 export default function Home({ posts }) {
   return (

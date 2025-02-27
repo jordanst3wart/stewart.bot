@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'Stewart.bot Blog',
+  title: 'Stewart.bot',
   author: 'Jordan Stewart',
   headerTitle: 'Stewart.bot',
   description:
