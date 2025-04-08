@@ -4,7 +4,6 @@ const colors = require('tailwindcss/colors')
 
 /** @type {import("tailwindcss/types").Config } */
 module.exports = {
-  // purge: [], // TODO typography styles might be getting purged
   content: [
     './node_modules/pliny/**/*.js',
     './app/**/*.{js,ts,jsx,tsx}',
