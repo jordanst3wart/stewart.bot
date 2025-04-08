@@ -5,6 +5,11 @@ const customTitles: Record<string, string> = {
   reactjs: 'React App Development Sydney',
   'Alternative jdk project layouts': 'Java Alternatives',
   'Exploring trade-offs of dynamic vs static typing': 'Python Programming Blog',
+  bazel: 'Bazel Blog',
+  frontend: 'Frontend Simplified',
+  terraform: 'Terraform Maps',
+  kotlin: 'Kotlin Advantages Over Java',
+  dsl: 'DSLS',
 }
 
 // SEO things
