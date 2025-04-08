@@ -37,7 +37,7 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="linkedin" href={linkedin} />
             </div>
           </div>
-          <article className="prose  dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
+          <article className="prose dark:prose-invert max-w-none pt-8 pb-8 xl:col-span-2">
             {children}
           </article>
         </div>
