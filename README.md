@@ -95,39 +95,16 @@ layout (optional list which should correspond to the file names in `data/layouts
 canonicalUrl (optional, canonical url for the post for SEO)
 ```
 
-Here's an example of a post's frontmatter:
-
-```
----
-title: 'Introducing Tailwind Nexjs Starter Blog'
-date: '2021-01-12'
-lastmod: '2021-01-18'
-tags: ['next-js', 'tailwind', 'guide']
-draft: false
-summary: 'Looking for a performant, out of the box template, with all the best in web technology to support your blogging needs? Checkout the Tailwind Nextjs Starter Blog template.'
-images: ['/static/images/some.jpg']
-authors: ['default']
-layout: PostLayout
-canonicalUrl: https://tailwind-nextjs-starter-blog.vercel.app/blog/introducing-tailwind-nextjs-starter-blog
----
-```
-
 # Blog ideas
 
 - leptos
-- vercel hosting vs aws s3 cloudfront
-- static vs dynamic typed languages
 
 Google stuff
-https://search.google.com/search-console/welcome?utm_source=about-page
-analytics
-
-Google web search console docs:
-https://support.google.com/webmasters/answer/9128669?utm_source=wnc_20079900&utm_medium=panel&utm_campaign=wnc_20079900&utm_content=msg_20079900&hl=en-GB#zippy=%2Cnot-much-time-to-manage-my-site%2Cweb-developer
-
-DSLs
+https://search.google.com/search-console?resource_id=sc-domain%3Astewart.bot
 
 AWS IAM vs other authenication methods (or AWS vs everyone)
 
 pliny I should inline the pliny library it's really small.
 next bump to 15
+
+
