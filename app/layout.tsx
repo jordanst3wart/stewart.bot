@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: './',
     siteName: siteMetadata.title,
     images: [],
-    locale: 'en_US',
+    locale: 'en_AU',
     type: 'website',
   },
   alternates: {
