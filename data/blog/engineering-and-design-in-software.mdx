@@ -1,0 +1,85 @@
+---
+title: Engineering and design in software
+date: '2026-5-16'
+tags: ['Design', 'Engineering', 'cyclomatic complexity']
+summary: Engineering and design principles in software engineering 
+---
+
+I was thinking about how efficiently software engineers can impact, or improve the customer experience. The customer can be an internal development team, or a paying customer outside of the company, or anyone using the software to achieve a goal - I guess. With the actions of a software engineer, I think there is two main groups, there is user impacting features, and code complexity/or code efficiency. Does the user need this feature, or does this feature positively impact the user? Does this code implement the feature without adding any unneeded complexity to the codebase.
+
+I think this largely goes from good engineering to good design. I think good engineering is using the engineering principles to achieve a goal, ie. using maths and relevant assumptions to archive a goal. But there is a lot of reduction in requirements, and refining requirements. I think the ideal of simplifying requirements that affects an end user crosses into the area of design. Or simply internal things are engineering, external things are design.
+
+With design commonly "Dieter Rams: Ten Principles of Good Design" are referenced. Out of these the one that stands out to me is "Good Design is as little design as possible.", or to be not burdened with non-essentials, or something about purity. I think this is interesting in software. If you are burdening a tool with non-essentials you are inadventuretly making the software worse.
+
+With inadventurely making a tool worst I was looking at the bootstrap feature of the cli tool `terragrunt`. The boostrap feature can allow users to automatically creates an s3 bucket to store terraform/opentofu state. The feature has a lot of built in flags, and I wonder how many end users interact with these flags. The flags add complexity to the codebase, and complexity to the document (assuming they are documented). So if they are not being used they affectively add negative value.
+
+So if you run `terragrunt backend bootstrap` if will create a s3 bucket that is encrypted, versioned, has TLS enforced, potentially has access logs stored, and a dynamo db table for locking. If I was designing this I would say use these options, or create your own bucket. Or use this happy path, or don't use this command at all. If you want manual control you can just create your own bucket. This ideally has a cyclomatic complexity of 2 in turns of engineering (an if statement), and a simple not burdening design. So it's ideal in the design and engineering sense. Keep this in mind when you read below.
+
+These are the some of the options terragrunt offers with the bootstrap option for aws s3 buckets from here: https://docs.terragrunt.com/reference/hcl/blocks/#backend
+- encrypt: whether to encrypt the s3 bucket or not, you will always want bucket encryption
+- skip_bucket_sseencryption: does the same thing as 'encrypt', but potentially opposite value (encrypt: true, skip_bucket_sseencryption: false), once again you always want bucket encryption on
+- skip_bucket_versioning: whether to have s3 bucket versioning on, you will always want to have bucket versioning on
+- skip_bucket_accesslogging: this is deprecated, and ignored
+- skip_bucket_root_access: I don't understand what this does. I will need to look at the code
+- skip_bucket_enforced_tls: configures the s3 bucket to not enforce TLS, you will always want the bucket to encrypt network traffic
+- skip_bucket_public_access_blocking: configures the s3 bucket to not block public access, you will always want the bucket to block public access
+- disable_bucket_update: I would be confused about this if I had not looked at the code. It prevents the bucket from being updated when a change is detected, either directly on the bucket, or in the configuration. I think this part of the code has a bug, more on that later. 
+- enable_lock_table_ssencryption: defaults to true. You would always want this to be encrypted
+- disable_aws_client_checksums: disables checksums on dynamodb. I think this is from a bug in the AWS SDK, or somewhere.
+- accesslogging_target_object_partition_date_source: adds logging information
+- skip_accesslogging_bucket_acl: skips the access logging buckets ACL (access control lists). AWS recommends disabling this as a security best practise so that all the objects in a bucket are owned by the bucket owner. I don't know if this disables if, or enables it by default.
+- skip_accesslogging_bucket_enforced_tls: skips enforces TLS for the bucket. It should always be enforced.
+- skip_accesslogging_bucket_public_access_blocking: skips public access blocking. It should always be blocked. 
+- skip_accesslogging_bucket_ssencryption: skips bucket encryption at rest. It should always be turned on.
+
+These configuration items are kafkaesque. Out of the 15 options i listed, 9 should always be configured one way always, 1 is a duplicate, 1 I don't understand, and 1 is to deal with a rare bug.
+
+These options at minimum add a cyclomatic complexity of 16. That enough to model an unsigned integer, or values from 0 to 65,535. The configuration options greatly confuse me as an end user, and they probably a few bugs - one of which I was looking to fix. Oddly, adding all of this functionality might seem like a point of achievement for an individual contributor too.
+
+The code itself is a little buggy. I was looking at a bug there the bucket would not be updated after it was first created. That is if the bucket was created, and a parameter changed it would not be updated (https://github.com/gruntwork-io/terragrunt/issues/5009). I think there is another bug were if you set disable bucket update and turn off versioning, I think the code turns on versioning - updating the bucket, as the code is like:
+```go
+if !extS3Cfg.DisableBucketUpdate {
+	if err := client.UpdateS3BucketIfNecessary(ctx, l, bucketName, opts); err != nil {
+		return err
+	}
+}
+
+if !extS3Cfg.SkipBucketVersioning {
+	// this will enable versioning if it is off
+	if _, err := client.CheckIfVersioningEnabled(ctx, l, bucketName); err != nil {
+		return err
+	}
+}
+```
+https://github.com/jordanst3wart/terragrunt/blob/bdde9ab37702e9f957c5ea7ed94285d3291a1666/internal/remotestate/backend/s3/backend.go
+
+So this feature has a bad design, or a lot of burden, complex engineering, with 16 cyclomatic complexity added, and bugs. Whereas not allowed the configuration options reduces the burden, and removes the complexity in engineering, and is easier to implement. This is better with software engineering efficency.
+
+I kind of think as an engineer when you implement something, you should be able to almost guarantee that it works. ie. if I make a spoon it will work as a spoon. If I make a configuration option the configuration option should do it's intended purpose.
+
+I wonder how these configuration came into being. I wonder if someone said, I think this feature needs these flags. I guess that person might be an architect with a bold vision. I wonder if the software engineer could of pushed back. Let's have a look!
+
+So if was done as a really large PR +6.8k -6k lines of code over 52 commits. First commit Mar 10, 2025, last commit Mar 27, 2025, which is relatively fast. I guess they worked for Gruntworks. It looks like they moved a lot of code in the tool in a short period of time, and the feature looks grouped together with refactoring work. So it looks like these configuration flags pre-date the feature... So it was added here: https://github.com/gruntwork-io/terragrunt/commit/a2b7de0a7e5d40a887da44ef88acd4dc7f848ba4 . Not true it even pre-dates that... this is 7 years ago...
+
+So this is where the `skip_bucket_root_access` comes from:
+https://github.com/gruntwork-io/terragrunt/pull/978
+It's actually to allow the root user to view the bucket contents. It should of just been a defaut... This is from Dec 19, 2019. So this feature has been in the codebase for over 6 years. It adds roughly a cyclomatic complexity of 16 as well, which is wild. Mostly from err statements.
+
+It's interesting looking at this commit from 2019:
+https://github.com/gruntwork-io/terragrunt/commit/08402c1e3cea331e0a708eaaa1d4416e9a0a0a8b
+It has this line:
+```
+skip_bucket_versioning         = true # use only if the object store does not support versioning
+```
+Which is a bit dumb. It could still be resolved with a default...
+
+This is interesting too:
+https://github.com/gruntwork-io/terragrunt/pull/647/changes
+It looks like skill issues. The project was in a completely different state then with the CEO working along side the software engineer. The software engineer is probably a lot better now. At the time he is making fairly basic mistakes, like adding in print statements, whilst having the PR open. This is Feb 11, 2019. It also looks like a design mistake, where they don't just allow any s3 bucket, but have to manually toggle flags. I think it can still be resolved in one of two cases, you bring your own s3 bucket, and terragrunt doesn't care, or you allow terragrunt to completely control your s3 bucket.
+
+It's interesting seeing how a bad design choice affectively calcifies, and how the code snowballs from being a few 100 lines to 6k lines of code. Of the 16 flags 4 are present in 2019. There is a few others that appear useless that have been removed, like `skip_get_ec2_platform`. I'm sure that flag would of been super useful.
+
+I guess it might be worth monitoring:
+1. the number of cli flags, and configuration options you expose to the end user, and you should try to limit the number
+2. the cyclomatic compexlity of the application. As it grows making changes becomes harder and harder.
+I guess those are two useful engineering and design ideas that I should implement in my code. I think it would make me more efficient as a software engineer.
